@@ -1,0 +1,9 @@
+admin
+root
+toor
+adm
+admin123
+anonymous
+sysop
+admnistrator
+superuser
